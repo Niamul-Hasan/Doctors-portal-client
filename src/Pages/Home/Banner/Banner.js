@@ -5,7 +5,10 @@ import background from '../../../assets/images/bg.png';
 const Banner = () => {
     return (
         <div
-            style={{ background: `url(${background})` }}
+            style={{
+                background: `url(${background})`,
+                backgroundSize: 'cover'
+            }}
             className="hero min-h-screen bg-base-100">
             <div className="hero-content flex-col lg:flex-row-reverse">
                 <img src={img} className="max-w-sm rounded-lg shadow-2xl" alt="" />
