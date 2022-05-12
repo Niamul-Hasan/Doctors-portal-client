@@ -14,10 +14,10 @@ const ServiceCart = () => {
     ]
     return (
         <>
-            <h3 class='text-center text-primary text-xl text-bold'>Our Services</h3>
-            <h1 class='text-center text-accent text-2xl'>Service We Provide</h1>
+            <h3 className='text-center text-primary text-xl text-bold'>Our Services</h3>
+            <h1 className='text-center text-accent text-2xl'>Services We Provide</h1>
 
-            <div class='grid grid-cols-1 lg:grid-cols-3 gap-4 pb-6'>
+            <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 pb-6'>
 
                 {
                     services.map(service => <ServiceDetails

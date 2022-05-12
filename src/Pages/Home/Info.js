@@ -6,7 +6,7 @@ import phone from '../../assets/icons/phone.svg';
 
 const Info = () => {
     return (
-        <div class='grid grid-cols-1 lg:grid-cols-3 gap-4 py-6 text-white'>
+        <div className='grid grid-cols-1 lg:grid-cols-3 gap-4 py-6 text-white'>
             <InfoCart bgClass='bg-gradient-to-r from-secondary to-primary' cartTitle='Opening Hours' img={clock}></InfoCart>
             <InfoCart bgClass='bg-accent' cartTitle='Our Locations' img={marker}></InfoCart>
             <InfoCart bgClass='bg-gradient-to-r from-secondary to-primary' cartTitle='Contact Us' img={phone}></InfoCart>

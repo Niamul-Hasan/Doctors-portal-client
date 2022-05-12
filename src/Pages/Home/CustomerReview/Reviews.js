@@ -34,7 +34,7 @@ const Reviews = () => {
     return (
         <section className='my-24'>
             <div className='flex justify-between items-center mb-12'>
-                <div>
+                <div className='pl-12'>
                     <h3 className='text-primary text-xl font-bold'>Testimonial</h3>
                     <h1 className='text-accent text-3xl'>What Our Patients Say</h1>
                 </div>
