@@ -8,9 +8,9 @@ import ServiceHero from './ServiceHero';
 const ServiceCart = () => {
     const services = [
 
-        { img: pic1, title: 'Cavity Treatment', description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, aliquam" },
-        { img: pic2, title: 'Flourish Treatment', description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, aliquam" },
-        { img: pic3, title: 'Teeth Whitening', description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, aliquam" },
+        { _id: 1, img: pic1, title: 'Cavity Treatment', description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, aliquam" },
+        { _id: 2, img: pic2, title: 'Flourish Treatment', description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, aliquam" },
+        { _id: 3, img: pic3, title: 'Teeth Whitening', description: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum, aliquam" },
     ]
     return (
         <>
@@ -21,6 +21,7 @@ const ServiceCart = () => {
 
                 {
                     services.map(service => <ServiceDetails
+                        key={service._id}
                         service={service}
                     ></ServiceDetails>)
                 }
