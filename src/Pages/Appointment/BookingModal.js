@@ -1,5 +1,6 @@
 import React from 'react';
 import { format } from 'date-fns';
+import { toast } from 'react-toastify';
 
 const BookingModal = ({ treatment, date, setTreatment }) => {
     const { name, slots } = treatment;
@@ -23,6 +24,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
             console.log(data);
         })
         setTreatment(null);
+        toast('Your Appointment is Confirmed');
     }
     return (
         <section>
