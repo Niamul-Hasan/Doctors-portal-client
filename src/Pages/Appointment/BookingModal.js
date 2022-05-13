@@ -12,6 +12,16 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
         const email = event.target.email.value;
         const phone = event.target.phone.value;
         console.log(name, email, phone, slot, date);
+        const bookings = { name, email, phone, slot, date };
+        fetch('http://localhost:5000/service', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bookings)
+        }).then(res => res.json()).then(data => {
+            console.log(data);
+        })
         setTreatment(null);
     }
     return (
@@ -31,7 +41,8 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
                         <input type="text" name="name" placeholder="Type Name" class="input input-bordered w-full max-w-xs" required />
                         <input type="text" name="email" placeholder="Type Email" class="input input-bordered w-full max-w-xs" required />
                         <input type="text" name="phone" placeholder="Type Phone Number" class="input input-bordered w-full max-w-xs" required />
-                        <input type="submit" value="Submit" class="btn btn-secondary w-full max-w-xs" />
+                        <input type="submit" value="Submit"
+                            class="btn btn-secondary w-full max-w-xs" />
                     </form>
                 </div>
             </div>
