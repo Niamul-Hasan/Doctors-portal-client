@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import auth from '../../firebase.init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import Loading from '../Shared/Loading';
-import { toast } from 'react-toastify';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {

@@ -16,8 +16,17 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
         const email = event.target.email.value;
         const phone = event.target.phone.value;
         console.log(name, email, phone, slot, date);
-        const bookings = { name, email, phone, slot, date };
-        fetch('http://localhost:5000/service', {
+        const bookings = {
+            Id: treatment._id,
+            Treatment: treatment.name,
+            Patient: name,
+            Email: email,
+            Phone: phone,
+            Slot: slot,
+            Date: date
+        };
+
+        fetch('http://localhost:5000/booking', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -25,9 +34,16 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
             body: JSON.stringify(bookings)
         }).then(res => res.json()).then(data => {
             console.log(data);
+            if (data.success) {
+                toast(`Your Appointment is Confirmed on ${date} at ${slot}`);
+            }
+            else {
+                toast.error(`Already have an appointment on ${data.data?.Date} at ${data.data?.Slot}`);
+            }
+            setTreatment(null);
+
         })
-        setTreatment(null);
-        toast('Your Appointment is Confirmed');
+
     }
     return (
         <section>
