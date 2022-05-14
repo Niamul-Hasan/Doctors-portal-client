@@ -7,6 +7,8 @@ import Home from './Pages/Home/Home';
 import Login from './Pages/Login/Login';
 import Navbar from './Pages/Shared/Navbar';
 import 'react-toastify/dist/ReactToastify.css';
+import PrivateLogin from './Pages/Login/PrivateLogin';
+import Register from './Pages/Login/Social/Register';
 
 
 function App() {
@@ -16,8 +18,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/about" element={<About />}></Route>
-        <Route path="/appointment" element={<Appointment />}></Route>
+        <Route path="/appointment" element={<PrivateLogin><Appointment />
+        </PrivateLogin>}></Route>
         <Route path="/login" element={<Login />}></Route>
+        <Route path="/register" element={<Register />}></Route>
       </Routes>
       <ToastContainer></ToastContainer>
     </div>

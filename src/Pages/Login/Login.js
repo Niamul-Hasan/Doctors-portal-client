@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import GoogleLogin from './Social/GoogleLogin';
 import { useForm } from "react-hook-form";
 import auth from '../../firebase.init';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import Loading from '../Shared/Loading';
 import { toast } from 'react-toastify';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 const Login = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -14,10 +15,21 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    const location = useLocation();
+    let from = location.state?.from?.pathname || "/";
+
     const onSubmit = data => {
         console.log(data)
         signInWithEmailAndPassword(data.email, data.password);
     };
+    const navigate = useNavigate()
+    useEffect(() => {
+
+        if (user) {
+            navigate(from, { replace: true });
+        }
+    }, [from, navigate, user])
 
     if (loading) {
         return <Loading></Loading>;
@@ -27,9 +39,7 @@ const Login = () => {
     if (error) {
         signinError = <p className='text-red-500'><small>{error.message}</small></p>
     }
-    if (user) {
-        toast(`${user.email} has successfully Loged in`);
-    }
+
 
     return (
         <div className='flex h-screen justify-center items-center'>
@@ -91,6 +101,7 @@ const Login = () => {
                         {signinError}
                         <input type="submit" value="Login" className='btn w-full max-w-xs' />
                     </form>
+                    <p><small>New to Doctors Portal? <Link className='text-primary' to="/register">Create New Account</Link></small></p>
 
                     <div class="divider">OR</div>
                     <GoogleLogin></GoogleLogin>
