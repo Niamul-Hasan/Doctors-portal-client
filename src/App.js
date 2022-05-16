@@ -9,6 +9,9 @@ import Navbar from './Pages/Shared/Navbar';
 import 'react-toastify/dist/ReactToastify.css';
 import PrivateLogin from './Pages/Login/PrivateLogin';
 import Register from './Pages/Login/Social/Register';
+import DashBoard from './Pages/DashBoard/DashBoard';
+import MyAppointment from './Pages/DashBoard/MyAppointment';
+import MyReview from './Pages/DashBoard/MyReview';
 
 
 function App() {
@@ -20,6 +23,15 @@ function App() {
         <Route path="/about" element={<About />}></Route>
         <Route path="/appointment" element={<PrivateLogin><Appointment />
         </PrivateLogin>}></Route>
+
+        {/* nested Route  */}
+        <Route path="/dash" element={<PrivateLogin><DashBoard />
+        </PrivateLogin>}>
+          <Route index element={<MyAppointment />}>
+          </Route>
+          <Route path='/dash/myreview' element={<MyReview />}></Route>
+        </Route>  {/* nested Route  */}
+
         <Route path="/login" element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
       </Routes>
