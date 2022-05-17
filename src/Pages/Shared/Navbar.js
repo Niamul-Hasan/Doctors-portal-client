@@ -14,7 +14,10 @@ const Navbar = () => {
         <li><Link to='/about'>About</Link></li>
         {user && <li><Link to='/dash'>DashBoard</Link></li>}
         {user
-            ? <li><button onClick={() => signOut(auth)}>LogOut</button></li>
+            ? <li><button onClick={() => {
+                signOut(auth);
+                localStorage.removeItem('accessToken')
+            }}>LogOut</button></li>
             : <li><Link to='/login'>Login</Link></li>}
     </>
 

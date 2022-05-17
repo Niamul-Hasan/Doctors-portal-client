@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useCreateUserWithEmailAndPassword, useUpdateProfile } from 'react-firebase-hooks/auth';
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from 'react-router-dom';
@@ -20,6 +20,12 @@ const Register = () => {
     const [token] = useToken(user)
 
     const navigate = useNavigate();
+    useEffect(() => {
+        if (token) {
+            console.log(user); //it is for checking purpose
+            navigate('/appointment');
+        }
+    }, [token, navigate, user])
 
     let signInError;
 
@@ -31,10 +37,7 @@ const Register = () => {
         signInError = <p className='text-red-500'><small>{error?.message || updateError?.message}</small></p>
     }
 
-    if (token) {
-        console.log(user);
-        navigate('/appointment');
-    }
+
 
     const onSubmit = async data => {
         await createUserWithEmailAndPassword(data.email, data.password);

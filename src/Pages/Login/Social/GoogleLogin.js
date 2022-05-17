@@ -16,10 +16,10 @@ const GoogleLogin = () => {
 
     useEffect(() => {
 
-        if (user) {
+        if (token) {
             navigate(from, { replace: true });
         }
-    }, [navigate, user, from])
+    }, [navigate, token, from])
 
     if (loading) {
         return <Loading></Loading>

@@ -12,6 +12,8 @@ import Register from './Pages/Login/Social/Register';
 import DashBoard from './Pages/DashBoard/DashBoard';
 import MyAppointment from './Pages/DashBoard/MyAppointment';
 import MyReview from './Pages/DashBoard/MyReview';
+import Users from './Pages/DashBoard/Users';
+import RequireAdmin from './Pages/Login/RequireAdmin';
 
 
 function App() {
@@ -30,6 +32,7 @@ function App() {
           <Route index element={<MyAppointment />}>
           </Route>
           <Route path='/dash/myreview' element={<MyReview />}></Route>
+          <Route path='/dash/users' element={<RequireAdmin><Users /></RequireAdmin>}></Route>
         </Route>  {/* nested Route  */}
 
         <Route path="/login" element={<Login />}></Route>
