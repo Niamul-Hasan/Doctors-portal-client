@@ -5,6 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../../firebase.init';
 import Loading from '../../Shared/Loading';
 import GoogleLogin from './GoogleLogin';
+import useToken from '../../Hooks/UseToken';
 
 const Register = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
@@ -16,6 +17,7 @@ const Register = () => {
     ] = useCreateUserWithEmailAndPassword(auth);
 
     const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+    const [token] = useToken(user)
 
     const navigate = useNavigate();
 
@@ -29,7 +31,7 @@ const Register = () => {
         signInError = <p className='text-red-500'><small>{error?.message || updateError?.message}</small></p>
     }
 
-    if (user) {
+    if (token) {
         console.log(user);
         navigate('/appointment');
     }
