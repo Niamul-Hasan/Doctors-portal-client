@@ -3,6 +3,7 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import { Link } from 'react-router-dom';
 import auth from '../../firebase.init';
 import { signOut } from "firebase/auth";
+import { FaUserTie } from "react-icons/fa"
 
 const Navbar = () => {
     const [user] = useAuthState(auth);
@@ -19,6 +20,7 @@ const Navbar = () => {
                 localStorage.removeItem('accessToken')
             }}>LogOut</button></li>
             : <li><Link to='/login'>Login</Link></li>}
+
     </>
 
 
@@ -49,6 +51,8 @@ const Navbar = () => {
                 <label for="dashBoard" className="btn btn-ghost lg:hidden">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                 </label>
+                {user && <p className='flex justify-items-center gap-2'><FaUserTie /> <span className='mb-2'>{user.email}</span></p>}
+
             </div>
 
         </div>
