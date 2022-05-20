@@ -1,7 +1,7 @@
 import { signOut } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 
 const MyAppointment = () => {
@@ -42,6 +42,7 @@ const MyAppointment = () => {
                             <th>Date</th>
                             <th>Time</th>
                             <th>Treatment</th>
+                            <th>Payment</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -52,6 +53,8 @@ const MyAppointment = () => {
                                 <td>{a.Date}</td>
                                 <td>{a.Slot}</td>
                                 <td>{a.Treatment}</td>
+                                {<td>{(a.price && !a.paid) && <Link to={`/dash/payment/${a._id}`}><button class="btn btn-xs btn-success">Pay</button></Link>}</td>}
+                                {<td>{(a.price && a.paid) && <span className='text-success text-xs'>Paid</span>}</td>}
                             </tr>)
                         }
 

@@ -20,6 +20,7 @@ const BookingModal = ({ treatment, date, setTreatment }) => {
             Id: treatment._id,
             Treatment: treatment.name,
             Patient: name,
+            price: treatment.price,
             Email: email,
             Phone: phone,
             Slot: slot,
