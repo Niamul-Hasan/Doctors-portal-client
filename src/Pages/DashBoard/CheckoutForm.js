@@ -1,8 +1,9 @@
 import { CardElement, useElements, useStripe } from '@stripe/react-stripe-js';
 import React, { useState, useEffect } from 'react';
+import Loading from '../Shared/Loading';
 
 const CheckoutForm = ({ appointment }) => {
-    const { price, Email, Patient } = appointment;
+    const { _id, price, Email, Patient, Treatment } = appointment;
 
     const stripe = useStripe();
     const elements = useElements();
@@ -11,6 +12,7 @@ const CheckoutForm = ({ appointment }) => {
     const [payment, setPayment] = useState('');
     const [transactionId, setTransactionId] = useState('');
     const [clientSecret, setClientSecret] = useState('');
+    const [processing, setProcessing] = useState(false);
 
     useEffect(() => {
         fetch('http://localhost:5000/create-payment-intent', {
@@ -47,6 +49,11 @@ const CheckoutForm = ({ appointment }) => {
 
         setCardError(error?.message || "");
         setPayment('');
+        setProcessing(true);
+
+        if (processing) {
+            return <Loading></Loading>
+        }
 
         const { paymentIntent, intentError } = await stripe.confirmCardPayment(
             clientSecret,
@@ -66,7 +73,28 @@ const CheckoutForm = ({ appointment }) => {
         else {
             setCardError('');
             setPayment('Congrates! Your payment is completed.');
-            setTransactionId(paymentIntent.id)
+            setTransactionId(paymentIntent.id);
+            //
+            const url = `http://localhost:5000/booking/${_id}`;
+            const paymentInfo = {
+                payment_ID: _id,
+                transactionId: paymentIntent.id,
+                appointment: Treatment,
+                payment_Amount: price,
+                patient: Patient
+            }
+            fetch(url, {
+                method: "PATCH",
+                headers: {
+                    'content-type': 'application/json',
+                    authorization: `Bearer ${localStorage.getItem('accessToken')}`
+                },
+                body: JSON.stringify(paymentInfo)
+            }).then(res => res.json()).then(data => {
+                console.log(data);
+                setProcessing(false);
+            });
+
             console.log(paymentIntent);
         }
 
@@ -90,7 +118,8 @@ const CheckoutForm = ({ appointment }) => {
                         },
                     }}
                 />
-                <button className='btn btn-primary btn-sm mt-4' type="submit" disabled={!stripe || !clientSecret}>
+                <button className='btn btn-primary btn-sm mt-4' type="submit"
+                    disabled={!stripe || !clientSecret || payment}>
                     Pay
                 </button>
             </form>
